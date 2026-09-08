@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test website</title>
+</head>
 <body>
     <h1>Test Website woo</h1>
     <p>vs studio shenanigans</p>
+
     <button>hi</button>
+    <button>hello</button>
+    <button>hello</button>
+
+    <p id="counter">Total clicks: <span id="clickCount">0</span></p>
+
+    <script>
+        let clickCount = 0;
+        const clickCountDisplay = document.getElementById('clickCount');
+
+        document.querySelectorAll('button').forEach((button) => {
+            button.addEventListener('click', () => {
+                clickCount += 1;
+                clickCountDisplay.textContent = clickCount;
+            });
+        });
+    </script>
 </body>
-
-
-
-<button>hello</button>
-
-
-
-<button>hello</button>
+</html>
