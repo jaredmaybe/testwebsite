@@ -4,6 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>test website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #counter {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .popup-number {
+            position: fixed;
+            font-family: "Brush Script MT", cursive;
+            font-size: 72px;
+            color: #ff4d6d;
+            font-weight: bold;
+            opacity: 0;
+            pointer-events: none;
+            animation: popUp 0.9s ease forwards;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: translate(0, 0) scale(0.5);
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(0, -60px) scale(1.2);
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Test Website woo</h1>
@@ -20,9 +57,21 @@
         const clickCountDisplay = document.getElementById('clickCount');
 
         document.querySelectorAll('button').forEach((button) => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
                 clickCount += 1;
                 clickCountDisplay.textContent = clickCount;
+
+                const popup = document.createElement('div');
+                popup.textContent = '+1';
+                popup.className = 'popup-number';
+                popup.style.left = `${event.clientX}px`;
+                popup.style.top = `${event.clientY}px`;
+                popup.style.transform = 'translate(-50%, -50%)';
+                document.body.appendChild(popup);
+
+                setTimeout(() => {
+                    popup.remove();
+                }, 900);
             });
         });
     </script>
